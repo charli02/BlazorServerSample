@@ -1,0 +1,65 @@
+﻿@page "/employeeoverview"
+@inherits EmployeeOverviewBase
+
+<h1>All Employee</h1>
+<BSBreadcrumb>
+    <BSBreadcrumbItem><a href="#">Home</a></BSBreadcrumbItem>
+    <BSBreadcrumbItem IsActive="true">Employee Overview</BSBreadcrumbItem>
+</BSBreadcrumb>
+<BSContainer>
+    <BSRow>
+        <BSCol>
+            @if (Employees == null)
+            {
+                <p><em>Loading...</em></p>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>SNo</th>
+                            <th>Employee Name</th>
+                            <th>Gender</th>
+                            <th>Department</th>
+                            <th>City</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var emp in Employees)
+                        {
+                            <tr>
+                                <td>@emp.EmployeeId</td>
+                                <td>@emp.Name</td>
+                                <td>@emp.Gender</td>
+                                <td>@emp.Department</td>
+                                <td>@emp.City</td>
+                                <td>
+                                    <a href="@($"employeedetail/{emp.EmployeeId}")" class="btn btn-danger btn-circle table-btn btnEmployeedetail">
+                                        <i class="fa fa-info-circle"></i>
+                                    </a>
+                                    <a href="@($"employeeedit/{emp.EmployeeId}")" class="btn btn-danger btn-circle table-btn btnEmployeeEdit">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+            }
+        </BSCol>
+    </BSRow>
+    <BSRow>
+        <BSCol XS="6">
+            <button type="button" class="btn btn-danger btn-circle btn-xl" id="btnQuickAddEmployee" @onclick="@QuickAddEmployee">
+                <i class="fa fa-plus"></i>
+            </button>
+        </BSCol>
+    </BSRow>
+</BSContainer>
+
+<BSTooltip Target="btnQuickAddEmployee" Placement="Placement.Right">Add New Employee</BSTooltip>
+<AddEmployeeDialog @ref="AddEmployeeDialog" CloseEventCallback="@AddEmployeeDialog_OnDialogClose"></AddEmployeeDialog>

@@ -1,0 +1,62 @@
+﻿@page "/employeeedit"
+@page "/employeeedit/{EmployeeId}"
+@inherits EmployeeEditBase
+@inject IToastService toastService
+
+
+<section class="employee-edit">
+
+    <h1 class="page-title">
+        Details for @Employee.Name
+        <span>
+            <a type="button" class="btn btn-danger btn-circle pull-right" id="btnBack" href="employeeoverview">
+                <i class="fa fa-angle-double-left"></i>
+            </a>
+        </span>
+    </h1>
+
+    <EditForm Model="@Employee" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+
+        <DataAnnotationsValidator />
+        @*<ValidationSummary />*@
+        <div class="form-group row">
+            <label for="name" class="col-sm-3">Name: </label>
+            <InputText id="name" class="form-control col-sm-8" @bind-Value="@Employee.Name" placeholder="Enter first name"></InputText>
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Employee.Name)" />
+        </div>
+        <div class="form-group row">
+            <label for="gender" class="col-sm-3">Gender: </label>
+            <InputText id="gender" class="form-control col-sm-8" @bind-Value="@Employee.Gender" placeholder="Enter gender"></InputText>
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Employee.Gender)" />
+        </div>
+        <div class="form-group row">
+            <label for="department" class="col-sm-3">Department: </label>
+            <InputText id="department" class="form-control col-sm-8" @bind-Value="@Employee.Department" placeholder="Enter department"></InputText>
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Employee.Department)" />
+        </div>
+        <div class="form-group row">
+            <label for="city" class="col-sm-3">City: </label>
+            <InputText id="city" class="form-control col-sm-8" @bind-Value="@Employee.City" placeholder="Enter city"></InputText>
+            <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Employee.City)" />
+        </div>
+
+        <button type="submit" id="btnUpdate" class="btn btn-danger btn-circle btn-xl"><i class="fa fa-floppy-o"></i></button>
+        <button type="button" class="btn btn-danger btn-circle btn-xl" id="btnCancel" @onclick="@NavigateToOverview"><i class="fa fa-times"></i></button>
+        @if (Employee.EmployeeId > 0)
+        {
+<button type="button" class="btn btn-danger btn-circle btn-xl" id="btnDelete" @onclick="@DeleteEmployee"><i class="fa fa-trash"></i></button>
+                    <BSTooltip Target="btnDelete" Placement="Placement.Bottom">Delete</BSTooltip>}
+
+    </EditForm>
+    <BSTooltip Target="btnUpdate" Placement="Placement.Bottom">Save Changes</BSTooltip>
+    <BSTooltip Target="btnCancel" Placement="Placement.Bottom">Cancel</BSTooltip>
+
+    <BSTooltip Target="btnBack" Placement="Placement.Left">Back to Employee Overview</BSTooltip>
+
+</section>
+
+@code { void OnDismiss()
+    {
+        Console.WriteLine("OnDismiss");
+        StateHasChanged();
+    } }

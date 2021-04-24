@@ -1,0 +1,27 @@
+﻿@page "/employeedetail/{EmployeeId}"
+@inherits EmployeeDetailBase
+
+<h1>
+    Detail for @Employee.Name<span>
+        <a type="button" class="btn btn-danger btn-circle pull-right" id="btnBack" href="employeeoverview">
+            <i class="fa fa-angle-double-left"></i>
+        </a>
+    </span>
+</h1>
+<BSBreadcrumb>
+    <BSBreadcrumbItem><a href="#">Home</a></BSBreadcrumbItem>
+    <BSBreadcrumbItem IsActive="true">Employee Detail</BSBreadcrumbItem>
+</BSBreadcrumb>
+<BSContainer>
+    <BSRow>
+        <BSCol SM="12" MD="6">
+            <strong>Name : </strong>@Employee.Name<br />
+            <strong>Gender : </strong>@Employee.Gender<br />
+            <strong>Department : </strong>@Employee.Department<br />
+            <strong>City : </strong>@Employee.City
+        </BSCol>
+    </BSRow>
+
+</BSContainer>
+
+<BSTooltip Target="btnBack" Placement="Placement.Left">Back to Employee Overview</BSTooltip>

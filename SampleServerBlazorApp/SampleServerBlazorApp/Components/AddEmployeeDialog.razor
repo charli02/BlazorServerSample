@@ -1,0 +1,53 @@
+﻿@inherits AddEmployeeDialogBase
+
+@if (ShowDialog)
+{
+    <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleLabel">Employee Quick Add</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <EditForm Model="@Employee" OnValidSubmit="@HandleValidSubmit">
+
+                        <DataAnnotationsValidator />
+                        @*<ValidationSummary />*@
+
+                        <div class="form-group">
+                            <label for="name">Name: </label>
+                            <InputText id="name" class="form-control" @bind-Value="@Employee.Name" placeholder="Enter name"></InputText>
+                            <ValidationMessage For="@(() => Employee.Name)" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Gender: </label>
+                            <InputText id="gender" class="form-control" @bind-Value="@Employee.Gender" placeholder="Enter gender"></InputText>
+                            <ValidationMessage For="@(() => Employee.Gender)" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="department">Department: </label>
+                            <InputText id="department" class="form-control" @bind-Value="@Employee.Department" placeholder="Enter department"></InputText>
+                            <ValidationMessage For="@(() => Employee.Department)" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">City: </label>
+                            <InputText id="city" class="form-control" @bind-Value="@Employee.City" placeholder="Enter city"></InputText>
+                            <ValidationMessage For="@(() => Employee.City)" />
+                        </div>
+
+                        <button type="submit" class="btn btn-danger btn-circle"><i class="fa fa-floppy-o"></i></button>
+                        <button class="btn btn-danger btn-circle" @onclick="@Close"><i class="fa fa-times"></i></button>
+                    </EditForm>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
